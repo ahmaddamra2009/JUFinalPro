@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Course>
+
+<section id="aa-latest-property">
+    <div class="container">
+        <div class="aa-latest-property-area">
+            <div class="aa-title">
+                <h2>Latest Courses</h2>
+                <span></span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                Cum sit ea nobis quae vero voluptatibus.</p>
+            </div>
+            <div class="aa-latest-properties-content">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4">
+                            <article class="aa-properties-item">
+                                <a href="#" class="aa-properties-item-img">
+                                    <img src="~/img/item/1.jpg" alt="img">
+                                </a>
+                                <div class="aa-tag for-sale">
+                                    @item.Venu
+                                </div>
+                                <div class="aa-properties-item-content">
+                                    <div class="aa-properties-info">
+                                        <span>@Html.DisplayNameFor(x=>x.SDate)</span>
+                                        <span>@item.SDate</span>
+                                        <span>Duration</span>
+                                        <span>@item.Hours Hr</span>
+                                    </div>
+                                    <div class="aa-properties-about">
+                                        <h3><a asp-action="CourseDetails"
+                                               asp-controller="Courses"
+                                               asp-route-id="@item.CourseId"
+                                               >@item.CoursesName</a></h3>
+                                        <p>@item.CoursesDescription.Substring(1,10) ... more</p>
+                                    </div>
+                                    <div class="aa-properties-detial">
+                                        <span class="aa-price">
+                                            $ @item.Price
+                                        </span>
+                                        <a asp-action="CourseDetails"
+                                               asp-controller="Courses"
+                                               asp-route-id="@item.CourseId"
+                                           class="aa-secondary-btn">View Details</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
