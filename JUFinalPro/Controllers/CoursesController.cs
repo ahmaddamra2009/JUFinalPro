@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JUFinalPro.Data;
 using JUFinalPro.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JUFinalPro.Controllers
 {
+    [Authorize]
     public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace JUFinalPro.Controllers
         }
 
         // GET: Courses
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Courses.Include(c => c.Category);
@@ -44,7 +47,7 @@ namespace JUFinalPro.Controllers
 
             return View(course);
         }
-
+     [Authorize(Roles ="admin")]
         // GET: Courses/Create
         public IActionResult Create()
         {
@@ -57,6 +60,7 @@ namespace JUFinalPro.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([Bind("CourseId,CoursesName,CoursesDescription,SDate,STime,Price,DisPerc,Hours,UrlVideo,Venu,CategoryId,IsActive,IsDeleted,TransactionDate")] Course course)
         {
             if (ModelState.IsValid)

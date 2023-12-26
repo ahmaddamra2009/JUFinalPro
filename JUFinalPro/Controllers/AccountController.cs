@@ -103,6 +103,13 @@ namespace JUFinalPro.Controllers
             return View(role);
         }
 
+
+        public IActionResult RolesList()
+        {
+            return View(roleManager.Roles);
+        }
+
+
         #endregion
 
     }
